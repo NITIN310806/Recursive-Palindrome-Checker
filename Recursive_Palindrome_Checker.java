@@ -1,40 +1,42 @@
 import java.util.Scanner;
+import java.util.Stack;
 
-    public class Recursive_Palindrome_Checker {
-        public static void main(String[] args) {
+public class Strategy_Pattern_Palindrome_Algorithms{
 
-            Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
 
-            System.out.print("Enter a string: ");
-            String input = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
-            // Normalize string (remove spaces, convert to lowercase)
-            String processed = input.replaceAll("\\s+", "").toLowerCase();
+        System.out.print("Input : ");
+        String input = scanner.nextLine();
+        PalindromeStrategy strategy = new StackStrategy();
+        boolean result = strategy.check(input);
 
-            boolean result = check(processed, 0, processed.length() - 1);
+        System.out.println("Is Palindrome?: " + result);
 
-            if (result) {
-                System.out.println("The given string is a Palindrome.");
-            } else {
-                System.out.println("The given string is NOT a Palindrome.");
-            }
+        scanner.close();
+    }
+}
+interface PalindromeStrategy {
 
-            scanner.close();
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+    @Override
+    public boolean check(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
-        private static boolean check(String s, int start, int end) {
-
-            // Base condition
-            if (start >= end) {
-                return true;
-            }
-
-            // Mismatch condition
-            if (s.charAt(start) != s.charAt(end)) {
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 return false;
             }
-
-            // Recursive call
-            return check(s, start + 1, end - 1);
         }
-    }
 
+        return true;
+    }
+}
