@@ -1,40 +1,45 @@
 import java.util.Scanner;
 
-    public class Recursive_Palindrome_Checker {
-        public static void main(String[] args) {
+public class UseCase11PalindromeCheckerApp {
 
-            Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
 
-            System.out.print("Enter a string: ");
-            String input = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
-            // Normalize string (remove spaces, convert to lowercase)
-            String processed = input.replaceAll("\\s+", "").toLowerCase();
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
 
-            boolean result = check(processed, 0, processed.length() - 1);
+        // Create service object
+        Object_Oriented_Palindrome_Service service =
+                new Object_Oriented_Palindrome_Service();
 
-            if (result) {
-                System.out.println("The given string is a Palindrome.");
-            } else {
-                System.out.println("The given string is NOT a Palindrome.");
-            }
+        boolean result = service.checkPalindrome(input);
 
-            scanner.close();
+        if (result) {
+            System.out.println("Palindrome: YES");
+        } else {
+            System.out.println("Palindrome: NO");
         }
-        private static boolean check(String s, int start, int end) {
 
-            // Base condition
-            if (start >= end) {
-                return true;
-            }
+        scanner.close();
+    }
+}
 
-            // Mismatch condition
-            if (s.charAt(start) != s.charAt(end)) {
+class Object_Oriented_Palindrome_Service {
+
+    public boolean checkPalindrome(String input) {
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
                 return false;
             }
-
-            // Recursive call
-            return check(s, start + 1, end - 1);
+            start++;
+            end--;
         }
-    }
 
+        return true;
+    }
+}
