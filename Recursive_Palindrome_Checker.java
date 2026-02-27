@@ -1,40 +1,20 @@
-import java.util.Scanner;
+public class Case_Insensitive_Space_Ignored_Palindrome {
+    public static void main(String[] args) {
+        
+        String input = "A man a plan a canal Panama";
 
-    public class Recursive_Palindrome_Checker {
-        public static void main(String[] args) {
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-            Scanner scanner = new Scanner(System.in);
+        boolean isPalindrome = true;
 
-            System.out.print("Enter a string: ");
-            String input = scanner.nextLine();
-
-            // Normalize string (remove spaces, convert to lowercase)
-            String processed = input.replaceAll("\\s+", "").toLowerCase();
-
-            boolean result = check(processed, 0, processed.length() - 1);
-
-            if (result) {
-                System.out.println("The given string is a Palindrome.");
-            } else {
-                System.out.println("The given string is NOT a Palindrome.");
+        for (int i = 0; i < normalized.length() / 2; i++) {
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
             }
-
-            scanner.close();
         }
-        private static boolean check(String s, int start, int end) {
 
-            // Base condition
-            if (start >= end) {
-                return true;
-            }
-
-            // Mismatch condition
-            if (s.charAt(start) != s.charAt(end)) {
-                return false;
-            }
-
-            // Recursive call
-            return check(s, start + 1, end - 1);
-        }
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
-
+}
