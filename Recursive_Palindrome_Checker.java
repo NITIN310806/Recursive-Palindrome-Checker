@@ -1,40 +1,40 @@
 import java.util.Scanner;
 
-    public class Recursive_Palindrome_Checker {
-        public static void main(String[] args) {
+public class UseCase3PalindromeCheckerApp {
 
-            Scanner scanner = new Scanner(System.in);
+    static final String APP_VERSION = "1.0";
 
-            System.out.print("Enter a string: ");
-            String input = scanner.nextLine();
+    public static void main(String[] args) {
 
-            // Normalize string (remove spaces, convert to lowercase)
-            String processed = input.replaceAll("\\s+", "").toLowerCase();
+        Scanner scanner = new Scanner(System.in);
 
-            boolean result = check(processed, 0, processed.length() - 1);
+        System.out.println("======================================");
+        System.out.println("     PALINDROME CHECK USING REVERSE   ");
+        System.out.println("======================================");
+        System.out.println("Application Name : Palindrome Checker App");
+        System.out.println("Application Version : " + APP_VERSION);
+        System.out.println("======================================");
 
-            if (result) {
-                System.out.println("The given string is a Palindrome.");
-            } else {
-                System.out.println("The given string is NOT a Palindrome.");
-            }
+        System.out.print("Enter a string: ");
+        String original = scanner.nextLine();
 
-            scanner.close();
+        String reversed = "";
+
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
-        private static boolean check(String s, int start, int end) {
 
-            // Base condition
-            if (start >= end) {
-                return true;
-            }
+        System.out.println("Reversed String: " + reversed);
 
-            // Mismatch condition
-            if (s.charAt(start) != s.charAt(end)) {
-                return false;
-            }
-
-            // Recursive call
-            return check(s, start + 1, end - 1);
+        if (original.equals(reversed)) {
+            System.out.println("Result: The string is a PALINDROME.");
+        } else {
+            System.out.println("Result: The string is NOT a palindrome.");
         }
+
+        System.out.println("======================================");
+        System.out.println("Program Ended Successfully.");
+
+        scanner.close();
     }
-
+}
