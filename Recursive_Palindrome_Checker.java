@@ -1,40 +1,21 @@
-import java.util.Scanner;
-
-    public class Recursive_Palindrome_Checker {
+import java.util.LinkedList;
+    public class Linked_List_Palindrome_Checker {
         public static void main(String[] args) {
 
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.print("Enter a string: ");
-            String input = scanner.nextLine();
-
-            // Normalize string (remove spaces, convert to lowercase)
-            String processed = input.replaceAll("\\s+", "").toLowerCase();
-
-            boolean result = check(processed, 0, processed.length() - 1);
-
-            if (result) {
-                System.out.println("The given string is a Palindrome.");
-            } else {
-                System.out.println("The given string is NOT a Palindrome.");
+            String input = "Nithil Surjith";
+            LinkedList<Character> list = new LinkedList<>();
+            for (char c : input.toCharArray()) {
+                list.add(c);
             }
-
-            scanner.close();
-        }
-        private static boolean check(String s, int start, int end) {
-
-            // Base condition
-            if (start >= end) {
-                return true;
+            boolean isPalindrome = true;
+            while (list.size() > 1) {
+                if (list.removeFirst() != list.removeLast()) {
+                    isPalindrome = false;
+                    break;
+                }
             }
-
-            // Mismatch condition
-            if (s.charAt(start) != s.charAt(end)) {
-                return false;
-            }
-
-            // Recursive call
-            return check(s, start + 1, end - 1);
+            System.out.println("Input : " + input);
+            System.out.println("Is Palindrome? : " + isPalindrome);
         }
     }
 
