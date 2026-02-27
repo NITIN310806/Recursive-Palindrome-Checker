@@ -1,40 +1,53 @@
 import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
-    public class Recursive_Palindrome_Checker {
-        public static void main(String[] args) {
+public class UseCase7PalindromeCheckerApp {
 
-            Scanner scanner = new Scanner(System.in);
+    static final String APP_VERSION = "1.0";
 
-            System.out.print("Enter a string: ");
-            String input = scanner.nextLine();
+    public static void main(String[] args) {
 
-            // Normalize string (remove spaces, convert to lowercase)
-            String processed = input.replaceAll("\\s+", "").toLowerCase();
+        Scanner scanner = new Scanner(System.in);
 
-            boolean result = check(processed, 0, processed.length() - 1);
+        System.out.println("======================================");
+        System.out.println("     DEQUE BASED PALINDROME CHECK     ");
+        System.out.println("======================================");
+        System.out.println("Application Name : Palindrome Checker App");
+        System.out.println("Application Version : " + APP_VERSION);
+        System.out.println("======================================");
 
-            if (result) {
-                System.out.println("The given string is a Palindrome.");
-            } else {
-                System.out.println("The given string is NOT a Palindrome.");
-            }
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
 
-            scanner.close();
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            deque.addLast(input.charAt(i));
         }
-        private static boolean check(String s, int start, int end) {
 
-            // Base condition
-            if (start >= end) {
-                return true;
+        boolean isPalindrome = true;
+
+        while (deque.size() > 1) {
+
+            char front = deque.removeFirst(); 
+            char rear = deque.removeLast();   
+
+            if (front != rear) {
+                isPalindrome = false;
+                break;
             }
-
-            // Mismatch condition
-            if (s.charAt(start) != s.charAt(end)) {
-                return false;
-            }
-
-            // Recursive call
-            return check(s, start + 1, end - 1);
         }
+
+        if (isPalindrome) {
+            System.out.println("Result: The string is a PALINDROME.");
+        } else {
+            System.out.println("Result: The string is NOT a palindrome.");
+        }
+
+        System.out.println("======================================");
+        System.out.println("Program Ended Successfully.");
+
+        scanner.close();
     }
-
+}
